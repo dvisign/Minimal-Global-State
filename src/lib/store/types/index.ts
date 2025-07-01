@@ -26,3 +26,9 @@ export interface AsyncAtom<T> extends Atom<T> {
   __async__: true;
   read(): T; // Suspense 호환 시 내부에서 throw
 }
+
+export type PersistMeta = {
+  key: string;
+  storage: Storage;
+  hydrated?: boolean;
+};
