@@ -1,7 +1,7 @@
-import { useCompanyInfo } from "@/queries/useCompanyInfo";
+import {useCompanyInfo} from "@/queries/useCompanyInfo";
 
 const HomeContainer = () => {
-  const { data: companyInfo, isLoading, error } = useCompanyInfo();
+  const {data: companyInfo, isLoading, error} = useCompanyInfo();
 
   if (isLoading) {
     return (

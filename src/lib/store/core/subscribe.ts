@@ -7,7 +7,6 @@ export function subscribe<T>(
   callback: (val: T) => void
 ): () => void {
   let subs = subscriberMap.get(atom);
-
   if (!subs) {
     subs = new Set();
     subscriberMap.set(atom, subs);
@@ -17,7 +16,6 @@ export function subscribe<T>(
 
   return () => {
     subs!.delete(callback);
-    // ⚠️ GC-friendly: 구독자가 0명이면 map 자체를 비움
     if (subs!.size === 0) {
       subscriberMap.delete(atom);
     }

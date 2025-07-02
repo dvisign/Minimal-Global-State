@@ -2,6 +2,7 @@ import {createBrowserRouter} from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import HomePage from "./routes/Home";
 import Todo from "./examples/Todo";
+import Example from "./examples/Example";
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
       {
         path: "/todo",
         element: <Todo />,
+      },
+      {
+        path: "/example",
+        element: <Example />,
       },
     ],
   },

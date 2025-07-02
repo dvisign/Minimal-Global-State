@@ -1,6 +1,6 @@
-import TodoList from "@/components/todo/TodoList";
-import TodoInput from "@/components/todo/TodoInput";
-import TodoFilter from "@/components/todo/TodoFilter";
+import TodoList from "@/examples/todo/components/TodoList";
+import TodoInput from "@/examples/todo/components/TodoInput";
+import TodoFilter from "@/examples/todo/components/TodoFilter";
 
 function Todo() {
   return (

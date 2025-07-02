@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import App from "./App.tsx";
 import "./index.css";
 
@@ -18,7 +18,7 @@ async function enableMocking() {
     return;
   }
 
-  const { worker } = await import("./__mocks__/browser");
+  const {worker} = await import("./__mocks__/browser");
   return worker.start({
     onUnhandledRequest: "bypass", // MSW에서 처리되지 않는 요청은 그대로 통과
   });

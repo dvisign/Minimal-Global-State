@@ -27,6 +27,15 @@ const Header = () => {
               }`}>
               TODO
             </Link>
+            <Link
+              to="/example"
+              className={`text-base font-medium ${
+                isActive("/example")
+                  ? "text-primary"
+                  : "text-gray-600 hover:text-gray-900"
+              }`}>
+              EXAMPLE
+            </Link>
             {/* <Link
               to="/company"
               className={`text-base font-medium ${
