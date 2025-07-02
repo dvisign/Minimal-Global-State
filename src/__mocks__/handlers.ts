@@ -1,4 +1,4 @@
-import { http, HttpResponse } from "msw";
+import {http, HttpResponse} from "msw";
 
 // 예시 API 응답 데이터
 const mockCompanyInfo = {
@@ -32,5 +32,65 @@ export const handlers = [
         type: "정규직",
       },
     ]);
+  }),
+  // Todo LIST API
+  http.get("/api/todo-list", () => {
+    const existingData = JSON.parse(localStorage.getItem("database") || "[]");
+
+    return HttpResponse.json(existingData, {status: 200});
+  }),
+  // Todo CREATE API
+  http.post("/api/create-todo", async ({request}) => {
+    const body = (await request.json()) as {todoItem: string};
+    const existingData = JSON.parse(localStorage.getItem("database") || "[]");
+
+    const newItem = {
+      id: Date.now(),
+      description: body.todoItem,
+      completed: false,
+    };
+
+    const updated = [...existingData, newItem];
+    localStorage.setItem("database", JSON.stringify(updated));
+
+    return HttpResponse.json(newItem, {status: 201});
+  }),
+  // Todo UPDATE API
+  http.post("/api/update-todo/:id", async ({params, request}) => {
+    const {id} = params;
+    const body = (await request.json()) as {description: string};
+
+    if (!body?.description) {
+      return HttpResponse.json({error: "Invalid body"}, {status: 400});
+    }
+
+    const db: {id: number; description: string; completed: boolean}[] =
+      JSON.parse(localStorage.getItem("database") || "[]");
+
+    const updated = db.map((todo) =>
+      todo.id === Number(id) ? {...todo, description: body.description} : todo
+    );
+
+    localStorage.setItem("database", JSON.stringify(updated));
+    return HttpResponse.json({success: true});
+  }),
+  // Todo COMPLETE API
+  http.post("/api/complete-todo/:id", async ({params}) => {
+    const {id} = params;
+    const db = JSON.parse(localStorage.getItem("database") || "[]");
+
+    const updated = db.map((todo: any) =>
+      todo.id === Number(id)
+        ? {
+            ...todo,
+            completed: true,
+            completedAt: new Date().toISOString(), // 완료 시간 저장
+          }
+        : todo
+    );
+
+    localStorage.setItem("database", JSON.stringify(updated));
+
+    return HttpResponse.json({success: true});
   }),
 ];

@@ -7,7 +7,7 @@ export interface Atom<T> {
 // 내부 저장소 타입: 외부에 노출되지 않음
 export interface InternalAtom<T> {
   value: T;
-  subscribers: Set<Subscriber<T>>;
+  subscribers: Set<(val: T) => void>;
 }
 
 // 구독자 콜백 타입

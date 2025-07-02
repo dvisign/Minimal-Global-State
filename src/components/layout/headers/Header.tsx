@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 
 const Header = () => {
   const location = useLocation();
@@ -19,6 +19,15 @@ const Header = () => {
           {/* Navigation Links */}
           <div className="hidden md:flex items-center space-x-8">
             <Link
+              to="/todo"
+              className={`text-base font-medium ${
+                isActive("/todo")
+                  ? "text-primary"
+                  : "text-gray-600 hover:text-gray-900"
+              }`}>
+              TODO
+            </Link>
+            {/* <Link
               to="/company"
               className={`text-base font-medium ${
                 isActive("/company")
@@ -47,7 +56,7 @@ const Header = () => {
               }`}
             >
               채용
-            </Link>
+            </Link> */}
           </div>
         </div>
       </div>
